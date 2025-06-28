@@ -1,4 +1,4 @@
-module github.com/disktnk/hugo-module-tokenizer
+module github.com/disktnk/kagome-example
 
 go 1.24.2
 
