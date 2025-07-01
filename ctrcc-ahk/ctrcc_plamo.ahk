@@ -6,14 +6,21 @@ SetWorkingDir %A_ScriptDir%
 ~^c::
 if (A_PriorHotkey = "~^c" and A_TimeSincePriorHotkey < 400)
 {
-    EdgeCommand := "C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe"
-    . " --profile-directory=Default"
-    . " --app-id=bgdpokccnccbdijmbapgneokhdimbomm"
-    . " --app-url=https://translate-demo.plamo.preferredai.jp/"
-    . " --app-launch-source=4"
-    Run, %EdgeCommand%
-    ; wait for the app
-    Sleep, 900
+    if WinExist("PLaMo Chat")
+    {
+        WinActivate
+        Sleep, 500
+    }
+    else
+    {
+        EdgeCommand := "C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe"
+        . " --profile-directory=Default"
+        . " --app-id=ahpoaghcibfhafeelbofbmjfoplkdhpd"
+        . " --app-url=https://chat-demo.plamo.preferredai.jp/"
+        . " --app-launch-source=4"
+        Run, %EdgeCommand%
+        Sleep, 2000
+    }
     ; original copied text save to temp
     OriginalClipboard := Clipboard
     ; add prompt to translate
@@ -21,10 +28,10 @@ if (A_PriorHotkey = "~^c" and A_TimeSincePriorHotkey < 400)
     ; wait for reflecting clipboard
     ClipWait, 10
     Send ^v
-    Sleep, 80
+    Sleep, 500
     Send {Enter}
     ; restore original copied text
-    Sleep, 100
+    Sleep, 50
     Clipboard := OriginalClipboard
 }
 return
